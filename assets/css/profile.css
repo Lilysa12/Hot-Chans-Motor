@@ -1,0 +1,774 @@
+/* ==================================== */
+/* 1. GLOBAL & RESET */
+/* ==================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Inter", sans-serif;
+}
+
+/* Kunci body biar gak ikut scroll */
+body {
+    background-color: #f7f9fc;
+    height: 100vh; 
+    overflow-y: hidden; 
+}
+
+/* Kunci container biar gak ikut scroll */
+.container {
+    display: flex;
+    width: 100%;
+    height: 100vh; 
+}
+
+/* ==================================== */
+/* 2. SIDEBAR */
+/* ==================================== */
+.sidebar {
+    width: 230px;
+    background: #1f6eff;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    flex-shrink: 0; 
+    height: 100%; /* Penuhi tinggi container */
+}
+
+.sidebar-logo {
+    font-weight: 700;
+    font-size: 18px;
+    margin-bottom: 35px;
+    padding-left: 10px;
+}
+
+.nav-menu {
+    list-style: none;
+}
+.nav-menu li {
+    margin-bottom: 10px;
+}
+.nav-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s;
+    text-decoration: none;
+    color: white;
+    font-weight: 500;
+}
+.nav-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+.nav-item span {
+    color: inherit; 
+}
+.nav-item img {
+    width: 18px;
+    height: 18px;
+    margin-right: 10px;
+    filter: brightness(0) invert(1);
+    object-fit: contain;
+}
+.nav-item.active {
+    background: #fff;
+    color: #1f6eff;
+    font-weight: 500;
+}
+.nav-item.active span {
+    color: #1f6eff;
+}
+.nav-item.active img {
+    filter: none;
+}
+.nav-bottom {
+    margin-top: 30px;
+}
+.nav-section-title {
+    font-size: 14px;
+    margin-bottom: 8px;
+    opacity: 0.9;
+    padding-left: 10px;
+    display: block;
+    text-transform: uppercase;
+}
+
+
+/* ==================================== */
+/* 3. MAIN CONTENT (LAYOUT) */
+/* ==================================== */
+.main-content {
+    flex: 1;
+    padding: 24px; 
+    overflow-y: auto; 
+    background-color: #f4f7f6;
+    display: flex; 
+    justify-content: center; 
+}
+
+.profile-layout {
+    display: flex;
+    max-width: 1200px; 
+    width: 100%; 
+    gap: 20px; 
+}
+
+/* =====================================
+BAGIAN KIRI (MY PROFILE)
+=====================================
+*/
+.settings-menu {
+    width: 306px;
+    height: 770px; /* Tinggi statis sesuai gambar */
+    
+    background-color: white;
+    padding: 24px 10px; 
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    
+    box-shadow: 0 4px 12px rgba(0.5, 0.5, 0.5, 0.08); 
+    border-radius: 8px; 
+    flex-shrink: 0; 
+}
+
+.settings-title {
+    font-size: 1.8rem;
+    font-weight: 600; /* "My Profile" BOLD */
+    margin-bottom: 24px;
+    color: #333;
+    width: 286px;
+    text-align: left;
+}
+
+.settings-menu ul {
+    list-style: none;
+    margin-bottom: 12px; 
+    padding: 0;
+    width: 286px;
+}
+.settings-menu ul li {
+     margin-bottom: 12px; 
+}
+.settings-menu ul li a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #475569;
+    font-weight: 500;
+    width: 286px;
+    height: 41px;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 0 15px; 
+    box-sizing: border-box; 
+}
+.settings-menu ul li a:hover {
+    background-color: #f8f9fa;
+    color: #1f6eff;
+}
+.settings-menu .logout-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    text-decoration: none;
+    color: #DC3545;
+    font-weight: 500;
+    background: none;
+    cursor: pointer;
+    font-size: 1rem;
+    font-family: 'Inter', sans-serif;
+    margin-top: 10px;
+    width: 286px;
+    height: 41px;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    box-sizing: border-box;
+}
+.settings-menu .logout-btn:hover {
+     background-color: #f8f9fa;
+}
+.settings-menu .logout-btn .logout-icon {
+    width: 18px;
+    height: 18px;
+    margin-right: 8px;
+    object-fit: contain;
+}
+
+
+/* =====================================
+BAGIAN KANAN (CARD-CARD)
+=====================================
+*/
+.profile-details {
+    flex: 1;
+    background-color: #f4f7f6;
+    padding: 0; 
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    gap: 20px; /* Jarak antar card */
+    padding-bottom: 39px; /* Jarak 39px di bawah */
+}
+
+.card {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    box-sizing: border-box; 
+    width: 100%; /* Lebar card ngikutin .profile-details */
+}
+
+/* UKURAN CARD (Tinggi Sesuai Request, Lebar Otomatis) */
+.card.card-admin {
+    height: 119px;
+    max-width: 592px; /* Lebar maks */
+}
+.card.card-info {
+    height: 196px;
+    max-width: 584px; /* Lebar maks */
+}
+.card.card-alamat {
+    height: 196px;
+    max-width: 584px; /* Lebar maks */
+}
+
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 24px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.card-header.blue-header {
+    background-color: #1f6eff;
+    color: white;
+    border-radius: 8px 8px 0 0;
+    border-bottom: none;
+}
+.card-header.blue-header h3 {
+    color: white;
+    font-weight: 600; /* "My Profile" BOLD */
+}
+
+.card-header h3 {
+    font-size: 1.1rem;
+    font-weight: 600; /* "Informasi Pribadi" BOLD */
+}
+
+.edit-btn {
+    background-color: white;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    padding: 6px 12px;
+    font-size: 0.9rem;
+    font-weight: 500; /* "Edit" NORMAL */
+    color: #475569;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+}
+.edit-btn:hover {
+    background-color: #f8f9fa;
+}
+.edit-btn .edit-icon { /* Ikon pensil (image) */
+    width: 16px;
+    height: 16px;
+    margin-left: 5px;
+    object-fit: contain;
+}
+
+.card-body {
+    padding: 24px;
+}
+
+.admin-profile {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.admin-avatar-img {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    object-fit: cover;
+    background-color: #e0e7ff;
+}
+
+.admin-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.admin-info strong {
+    font-size: 1.2rem;
+    font-weight: 600; /* "Hot Chan's Motor" BOLD */
+}
+
+.admin-info p.admin-role {
+    font-size: 0.9rem;
+    color: #64748b;
+    font-weight: 400; /* "Pemilik Toko" NORMAL/LIGHT */
+    margin-bottom: 2px;
+}
+
+.admin-info p.admin-type,
+.admin-info small:last-of-type {
+    font-size: 0.9rem;
+    color: #A3A3A3; /* ABU-ABU MUDA (sesuai gambar) */
+    font-weight: 400; /* NORMAL/LIGHT */
+}
+
+/* =====================================
+INI REVISINYA, BANG. WARNA JADI ABU MUDA.
+=====================================
+*/
+.admin-info p.admin-type {
+    font-size: 0.9rem;
+    color: #A3A3A3; /* ABU-ABU MUDA */
+    font-weight: 400; /* "Admin" NORMAL/LIGHT */
+}
+/* =====================================
+AKHIR REVISI
+=====================================
+*/
+
+
+.grid-form { display: grid; grid-template-columns: 1fr 1fr; gap: 20px 30px; }
+.form-group { display: flex; flex-direction: column; }
+
+.form-group label { 
+    font-size: 0.8rem; 
+    font-weight: 400; 
+    color: #64748b; 
+    margin-bottom: 4px; 
+}
+
+.form-group p { 
+    font-size: 0.95rem; 
+    font-weight: 500; 
+    color: #1e293b; 
+}
+.form-group.bio { 
+    grid-column: 1 / -1; 
+    margin-top: 10px; 
+}
+
+
+/* ==================================== */
+/* 4. MODAL (TETAP SAMA) */
+/* ==================================== */
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5); 
+    align-items: center;
+    justify-content: center;
+}
+/* ... (Sisa kode CSS Modal tetap sama) ... */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 24px 30px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+    animation: fadeIn 0.3s;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.close-btn {
+    color: #aaa;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.close-btn:hover,
+.close-btn:focus {
+    color: black;
+}
+.modal-content h2 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+.modal-content.text-center {
+    text-align: center;
+}
+.modal-content.text-center p {
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+}
+.modal-content form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.modal-content form label {
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-bottom: -5px;
+}
+.modal-content form input[type="text"],
+.modal-content form input[type="email"],
+.modal-content form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 0.95rem;
+}
+.modal-content form textarea {
+    min-height: 80px;
+    resize: vertical;
+}
+.modal-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+.modal-buttons.justify-center {
+    justify-content: center;
+}
+.modal-buttons button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.btn-save {
+    background-color: #1f6eff;
+    color: white;
+}
+.btn-save:hover {
+    background-color: #0a51c4;
+}
+.btn-cancel {
+    background-color: #e2e8f0;
+    color: #333;
+}
+.btn-cancel:hover {
+    background-color: #cbd5e1;
+}
+.btn-danger {
+    background-color: #1f6eff;
+    color: white;
+}
+.btn-danger:hover {
+    background-color: #b02a37;
+}
+
+/* === Notifikasi Popup Style === */
+.notif-popup {
+  max-width: 600px;
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 5px 30px rgba(0, 0, 0, 0.15);
+  font-family: 'Inter', sans-serif;
+}
+
+.notif-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.mark-read {
+  background: none;
+  border: none;
+  color: #00a676;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.notif-section h4 {
+  margin-bottom: 10px;
+  color: #888;
+  font-size: 14px;
+}
+
+.notif-item {
+  display: flex;
+  align-items: flex-start;
+  background: #f9fafb;
+  border-radius: 10px;
+  padding: 12px 15px;
+  margin-bottom: 10px;
+}
+
+.notif-item.highlight {
+  background: #e9f8f0;
+}
+
+.notif-icon {
+  font-size: 24px;
+  margin-right: 12px;
+}
+
+.notif-info strong {
+  display: block;
+  font-size: 15px;
+  margin-bottom: 3px;
+}
+
+.notif-info p {
+  font-size: 14px;
+  color: #444;
+  margin-bottom: 6px;
+}
+
+.notif-time {
+  font-size: 12px;
+  color: #888;
+}
+
+.status-success {
+  color: #00a676;
+  font-weight: 600;
+}
+
+.status-complete {
+  color: #007bff;
+  font-weight: 600;
+}
+
+.status-expire {
+  color: #d9534f;
+  font-weight: 600;
+}
+
+.popup {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.popup.hidden { display: none; }
+
+.popup-content {
+  background: #fff;
+  border-radius: 10px;
+  width: 400px;
+  max-height: 80vh;
+  overflow-y: auto;
+  padding: 20px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.popup-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.popup-header button {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.notif-item {
+  background: #f8f8f8;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+}
+.notif-item.warning { background: #fff6e5; }
+.notif-item.success { background: #e8ffe8; }
+
+
+/* === Perbaikan dan Tambahan untuk Notifikasi Popup === */
+
+/* Pastikan .notif-popup memiliki position: relative agar
+   tombol close (X) muncul di dalam popup */
+.notif-popup {
+    position: relative;
+    /* (Anda sudah punya style lain untuk ini, biarkan saja) */
+}
+
+/* Style untuk ikon bulat seperti di contoh */
+.notif-icon-circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-right: 15px;
+    font-size: 20px;
+}
+
+/* Warna background ikon yang berbeda */
+.notif-icon-circle.house {
+    background-color: #e6f0ff; /* Biru muda */
+    color: #4a90e2;
+}
+.notif-icon-circle.money {
+    background-color: #e8f7f0; /* Hijau muda */
+    color: #00a676;
+}
+.notif-icon-circle.time {
+    background-color: #fef3e6; /* Oranye muda */
+    color: #f5a623;
+}
+
+/* Ganti .notif-icon (jika ada) dengan .notif-icon-circle di .notif-item */
+.notif-item {
+    display: flex;
+    align-items: flex-start; /* Ubah dari center ke flex-start */
+    background: #f9fafb;
+    border-radius: 10px;
+    padding: 15px; /* Sedikit lebih besar paddingnya */
+    margin-bottom: 10px;
+}
+
+.notif-info p {
+    font-size: 14px;
+    color: #555; /* Sedikit lebih gelap agar mudah dibaca */
+    line-height: 1.5;
+    margin-bottom: 6px;
+}
+
+/* Style untuk link "View all notifications" */
+.notif-footer {
+    text-align: center;
+    padding-top: 15px;
+    border-top: 1px solid #f0f0f0;
+    margin-top: 20px;
+}
+
+.notif-footer a {
+    text-decoration: none;
+    color: #1f6eff;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.notif-footer a:hover {
+    text-decoration: underline;
+}
+
+/* === Popup Edit Profil versi dua kolom, jarak rapat === */
+#edit-profile-modal .modal-content {
+  max-width: 850px;  /* Lebar pas di layar */
+  padding: 20px 28px;
+}
+
+#edit-profile-modal form {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Dua kolom sejajar */
+  column-gap: 20px; /* Jarak antar kolom */
+  row-gap: 8px; /* Jarak antar baris lebih rapat */
+}
+
+/* Judul setiap bagian full width */
+#edit-profile-modal form h4 {
+  grid-column: 1 / -1;
+  margin-top: 12px;
+  margin-bottom: 6px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #1f6eff;
+}
+
+/* Label dan input */
+#edit-profile-modal form label {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #334155;
+}
+
+#edit-profile-modal form input,
+#edit-profile-modal form textarea,
+#edit-profile-modal form select {
+  width: 100%;
+  padding: 7px 10px; /* Lebih rapat */
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-family: 'Inter', sans-serif;
+  resize: vertical;
+}
+
+/* Textarea lebih pendek default */
+#edit-profile-modal form textarea {
+  min-height: 50px;
+}
+
+/* Tombol di bawah dua kolom */
+#edit-profile-modal .modal-buttons {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+/* Tombol */
+#edit-profile-modal .btn-save {
+  background-color: #1f6eff;
+  color: white;
+  padding: 8px 18px;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+#edit-profile-modal .btn-save:hover {
+  background-color: #0a51c4;
+}
+
+#edit-profile-modal .btn-cancel {
+  background-color: #e2e8f0;
+  color: #333;
+  padding: 8px 18px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+#edit-profile-modal .btn-cancel:hover {
+  background-color: #cbd5e1;
+}
+
+
+

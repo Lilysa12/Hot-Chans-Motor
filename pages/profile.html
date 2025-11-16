@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - Hot Chan's Motor</title>
+
+    <link rel="stylesheet" href="../assets/css/profile.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <nav class="sidebar">
+            <div class="nav-top">
+                <h1 class="sidebar-logo">Hot Chan’s Motor</h1>
+                <ul class="nav-menu">
+                    <li>
+                        <a href="dashboard.html" class="nav-item">
+                            <img src="../assets/gambar/icons/dashboard.png" alt="Dashboard"> <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="databarang.html" class="nav-item">
+                            <img src="../assets/gambar/icons/data barang.png" alt="Data Barang"> <span>Data
+                                Barang</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="barangmasuk.html" class="nav-item">
+                            <img src="../assets/gambar/icons/barang masuk.png" alt="Barang Masuk"> <span>Barang
+                                Masuk</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="barangkeluar.html" class="nav-item">
+                            <img src="../assets/gambar/icons/barang keluar.png" alt="Barang Keluar"> <span>Barang
+                                Keluar</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="nav-bottom">
+                <span class="nav-section-title">Akun</span>
+                <ul class="nav-menu">
+                    <li>
+                        <a href="tentangkami.html" class="nav-item">
+                            <img src="../assets/gambar/icons/kelola toko.png" alt="Tentang Kami"> <span>Tentang
+                                Kami</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="profile.html" class="nav-item active">
+                            <img src="../assets/gambar/icons/profile.png" alt="Profile"> <span>Profile</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <main class="main-content">
+
+            <div class="profile-layout">
+                <div class="settings-menu">
+                    <h1 class="settings-title">Profil Saya</h1>
+                    <ul>
+                        <li><a href="#" id="edit-profile-btn">Edit Profil</a></li>
+                        <li><a href="#" id="notif-btn">Notifikasi</a></li>
+
+                    </ul>
+                    <a href="#" class="logout-btn" id="logout-btn">
+                        <img src="../assets/gambar/icons/keluar.png" class="logout-icon" alt="Logout"> Keluar
+                    </a>
+                </div>
+
+                <div class="profile-details">
+                    <div class="card">
+                        <div class="card-header blue-header">
+                            <h3>Profil Saya</h3>
+                        </div>
+                        <div class="card-body admin-profile">
+                            <img src="../assets/gambar/profile/profil.png" class="admin-avatar-img" alt="Avatar">
+                            <div class="admin-info">
+                                <strong>Hot Chan's Motor</strong>
+                                <small>Pemilik Toko</small>
+                                <small>Admin</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Informasi Pribadi</h3>
+                        </div>
+                        <div class="card-body grid-form">
+                            <div class="form-group">
+                                <label>Nama Depan</label>
+                                <p>Loisa</p>
+                            </div>
+                            <div class="form-group">
+                                <label>Nama Belakang</label>
+                                <p>Saragih</p>
+                            </div>
+                            <div class="form-group">
+                                <label>Email</label>
+                                <p>Loisa@gmail.com</p>
+                            </div>
+                            <div class="form-group">
+                                <label>Nomor Handphone</label>
+                                <p>085373726777</p>
+                            </div>
+                            <div class="form-group bio">
+                                <label>Bio</label>
+                                <p>Pemilik Toko</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Alamat</h3>
+                        </div>
+                        <div class="card-body grid-form">
+                            <div class="form-group">
+                                <label>Provinsi</label>
+                                <p>Sumatera Utara</p>
+                            </div>
+                            <div class="form-group">
+                                <label>Kota/Kabupaten</label>
+                                <p>Simalungun</p>
+                            </div>
+                            <div class="form-group">
+                                <label>Kecamatan</label>
+                                <p>Silimakuta</p>
+                            </div>
+                            <div class="form-group">
+                                <label>Kode Pos</label>
+                                <p>21167</p>
+                            </div>
+                            <div class="form-group bio">
+                                <label>Bio</label>
+                                <p>Pemilik Toko</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal Edit Profil -->
+                <div id="edit-profile-modal" class="modal">
+                    <div class="modal-content">
+                        <span class="close-btn">&times;</span>
+                        <h2>Edit Semua Data Profil</h2>
+                        <form id="edit-profile-form">
+                            <h4>Data Toko</h4>
+                            <label>Nama Toko</label>
+                            <input type="text" id="store-name" value="Hot Chan's Motor">
+                            <label>Peran 1</label>
+                            <input type="text" id="role1" value="Pemilik Toko">
+                            <label>Peran 2</label>
+                            <input type="text" id="role2" value="Admin">
+
+                            <h4>Informasi Pribadi</h4>
+                            <label>Nama Depan</label>
+                            <input type="text" id="first-name" value="Loisa">
+                            <label>Nama Belakang</label>
+                            <input type="text" id="last-name" value="Saragih">
+                            <label>Email</label>
+                            <input type="email" id="email" value="Loisa@gmail.com">
+                            <label>Nomor Handphone</label>
+                            <input type="text" id="phone" value="085373726777">
+                            <label>Bio</label>
+                            <textarea id="bio-personal">Pemilik Toko</textarea>
+
+                            <h4>Alamat</h4>
+                            <label>Provinsi</label>
+                            <input type="text" id="province" value="Sumatera Utara">
+                            <label>Kota/Kabupaten</label>
+                            <input type="text" id="city" value="Simalungun">
+                            <label>Kecamatan</label>
+                            <input type="text" id="district" value="Silimakuta">
+                            <label>Kode Pos</label>
+                            <input type="text" id="zip" value="21167">
+
+                            <div class="modal-buttons">
+                                <button type="button" class="btn-cancel">Batal</button>
+                                <button type="submit" class="btn-save">Simpan</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Modal Logout -->
+                <div id="logout-modal" class="modal">
+                    <div class="modal-content text-center">
+                        <span class="close-btn">&times;</span>
+                        <h2>Keluar</h2>
+                        <p>Yakin mau keluar?</p>
+                        <div class="modal-buttons justify-center">
+                            <button type="button" class="btn-cancel" id="logout-no">Tidak</button>
+                            <button type="button" class="btn-danger" id="logout-yes">Iya</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="notification-modal" class="modal">
+                    <div class="notif-popup">
+                        <span class="close-btn">&times;</span>
+
+                        <div class="notif-header">
+                            <h2>Notifikasi</h2>
+                            <button class="mark-read">✓ Tandai semua telah dibaca</button>
+                        </div>
+
+                        <div class="notif-section">
+                            <h4>Hari Ini</h4>
+
+                            <!-- NOTIF 1 -->
+                            <div class="notif-item highlight">
+                                <div class="notif-icon-circle time">
+                                    <span>⚠️</span>
+                                </div>
+                                <div class="notif-info">
+                                    <strong>Stok Barang Menipis</strong>
+                                    <p>
+                                        Stok untuk <strong>Oli Mesin Federal (SKU: OLI-FED-001)</strong> telah mencapai
+                                        batas minimum.
+                                        Sisa stok: <span class="status-expire">5 buah</span>. Segera lakukan pemesanan
+                                        ulang.
+                                    </p>
+                                    <span class="notif-time">5m lalu</span>
+                                </div>
+                            </div>
+
+                            <!-- NOTIF 2 -->
+                            <div class="notif-item">
+                                <div class="notif-icon-circle money">
+                                    <span>📥</span>
+                                </div>
+                                <div class="notif-info">
+                                    <strong>Barang Masuk Berhasil</strong>
+                                    <p>
+                                        Sebanyak <strong>50 buah Busi Iridium</strong> telah
+                                        <span class="status-success">berhasil</span> ditambahkan ke inventaris.
+                                        Stok total sekarang: <strong>120 buah</strong>.
+                                    </p>
+                                    <span class="notif-time">1 jam lalu</span>
+                                </div>
+                            </div>
+
+                            <!-- NOTIF 3 -->
+                            <div class="notif-item">
+                                <div class="notif-icon-circle house">
+                                    <span>🏠</span>
+                                </div>
+                                <div class="notif-info">
+                                    <strong>Pembaruan Data Sistem</strong>
+                                    <p>
+                                        Data untuk <strong>Filter Udara (SKU: F-001)</strong> telah
+                                        <span class="status-complete">diperbarui</span> oleh Admin.
+                                        Harga baru: <strong>Rp 45.000</strong>.
+                                    </p>
+                                    <span class="notif-time">3 jam lalu</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="notif-footer">
+                            <a href="#">Lihat semua notifikasi</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div id="popupNotifikasi" class="popup hidden">
+                <div class="popup-content" <div class="popup-header">
+                    <h2>Notifikasi</h2>
+                    <button id="closePopup">&times;</button>
+                </div>
+                <div class="popup-body">
+                    <!-- Isi notifikasi -->
+                    <div class="notif-item warning">
+                        <h4>⚠️ Stok Barang Menipis</h4>
+                        <p>Oli Mesin Federal (SKU: OLI-FED-001) tersisa 5 buah.</p>
+                    </div>
+                    <div class="notif-item success">
+                        <h4>✅ Barang Masuk Berhasil</h4>
+                        <p>50 Busi Iridium telah ditambahkan. Total: 120 buah.</p>
+                    </div>
+                </div>
+            </div>
+    </div>
+
+
+    </div>
+    </div>
+
+    <script src="../assets/js/profile.js"></script>
+    <script src="../backend/login.js"></script>
+
+    </main>
+</body>
+
+</html>

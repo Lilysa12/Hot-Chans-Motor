@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Data Barang</title>
+  
+  <link rel="stylesheet" href="../assets/css/databarang.css">
+  
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+
+  <div class="sidebar">
+    <div class="sidebar-logo">Hot Chan’s Motor</div>
+    
+    <ul class="nav-menu">
+      <li><a href="dashboard.html" class="nav-item">
+        <img src="../assets/gambar/icons/dashboard.png" alt="Dashboard">
+        <span>Dashboard</span>
+      </a></li>
+      <li><a href="databarang.html" class="nav-item active">
+        <img src="../assets/gambar/icons/data barang.png" alt="Data Barang">
+        <span>Data Barang</span>
+      </a></li>
+      <li><a href="barangmasuk.html" class="nav-item">
+        <img src="../assets/gambar/icons/barang masuk.png" alt="Barang Masuk">
+        <span>Barang Masuk</span>
+      </a></li>
+      <li><a href="barangkeluar.html" class="nav-item">
+        <img src="../assets/gambar/icons/barang keluar.png" alt="Barang Keluar">
+        <span>Barang Keluar</span>
+      </a></li>
+    </ul>
+    
+    <div class="nav-bottom">
+      <span class="nav-section-title">Akun</span>
+      <ul class="nav-menu">
+        <li><a href="tentangkami.html" class="nav-item">
+          <img src="../assets/gambar/icons/kelola toko.png" alt="Tentang Kami">
+          <span>Tentang Kami</span>
+        </a></li>
+        <li><a href="profile.html" class="nav-item">
+          <img src="../assets/gambar/icons/profile.png" alt="Profile">
+          <span>Profile</span>
+        </a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="main-content">
+    
+    <div class="welcome-section">
+      <h1>Selamat Datang di Sistem Manajemen Barang Hot Chan's Motor</h1>
+      <p>Satu tempat untuk memastikan semua data barang Anda selalu akurat dan terorganisir.</p>
+    </div>
+
+    <div class="content-wrapper">
+      
+      <div class="table-header">
+        <h3>Data Barang</h3>
+        <div class="header-controls">
+          <div class="lihat-box">
+            <span>Lihat</span>
+            <select id="limitSelect">
+              <option value="10">10</option>
+              <option value="25">25</option>
+              <option value="50">50</option>
+            </select>
+          </div>
+          <div class="search-box">
+            <img src="../assets/gambar/icons/cari.png" alt="Cari">
+            <input type="text" id="searchInput" placeholder="Cari nama barang...">
+          </div>
+        </div>
+      </div>
+
+      <div class="table-container">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Kode</th>
+              <th>Nama Barang</th>
+              <th>Tanggal</th>
+              <th>Merek</th>
+              <th>Harga Beli</th>
+              <th>Harga Jual</th>
+              <th>Stok</th>
+              <th>Aksi</th>
+            </tr>
+          </thead>
+          <tbody id="dataTableBody">
+            <tr><td colspan="8" style="text-align:center; padding: 20px;">Memuat data...</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="pagination">
+        <button class="page-nav" id="prevPage" disabled>Sebelumnya</button>
+        <div class="page-numbers" id="pageNumbers">
+          </div>
+        <button class="page-nav" id="nextPage">Selanjutnya</button>
+      </div>
+
+    </div> </div> <div id="modal-overlay" class="hidden"></div>
+  <div id="edit-modal" class="modal hidden">
+    <div class="modal-content">
+      <h2>Edit Barang</h2>
+      <form id="editForm">
+        <label>Kode Barang</label>
+        <input type="text" id="editKode" readonly>
+        <label>Nama Barang</label>
+        <input type="text" id="editNama" required>
+        <label>Merek</label>
+        <input type="text" id="editMerek" required>
+        <label>Harga Beli</label>
+        <input type="number" id="editHargaBeli" required>
+        <label>Harga Jual</label>
+        <input type="number" id="editHargaJual" required>
+        <label>Stok Barang</label>
+        <input type="number" id="editStok" required>
+        <div class="modal-actions">
+          <button type="submit" class="btn-save">Simpan</button>
+          <button type="button" id="cancelEdit" class="btn-cancel">Batal</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div id="delete-modal" class="modal hidden">
+    <div class="modal-content">
+      <h2>Hapus Barang</h2>
+      <p>Apakah kamu yakin ingin menghapus barang ini?</p>
+      <div class="modal-actions">
+        <button id="confirmDelete" class="btn-delete">Ya, Hapus</button>
+        <button id="cancelDelete" class="btn-cancel">Batal</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../assets/js/databarang.js"></script>
+  <script src="../api/dataBarang.js"></script>
+</body>
+</html>

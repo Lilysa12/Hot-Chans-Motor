@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hot Chan's Motor | Login</title>
+    
+    <link rel="stylesheet" href="assets/css/login.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+</head>
+<body class="login-page">
+
+    <div class="login-container"> 
+        
+        <div class="left-section">
+            
+            <div id="login-page" class="page">
+                <div class="logo">Hot Chan’s Motor</div>
+                <h1>Holla,<br>Selamat Datang!</h1>
+                <p class="subtitle">Rekap Datamu</p>
+
+                <form id="loginForm">
+                    <label for="login-email">Username</label>
+                    <input type="text" id="login-email" placeholder="hot chans" required />
+
+                    <label for="login-password">Password</label>
+                    <input type="password" id="login-password" placeholder="" required />
+
+                    <a href="#" class="link" id="goto-forgot">Lupa Password?</a>
+                    <button type="submit" class="btn-primary">Login</button>
+                </form>
+
+                <footer>© 2025 Hot Chan’s Motor. All rights reserved.</footer>
+            </div>
+
+            <div id="forgot-page" class="page hidden">
+                 <div class="logo">Hot Chan’s Motor</div>
+                 <h1>Lupa Password?</h1>
+                 <p class="subtitle">Masukkan Email Untuk Mereset Password Kamu</p>
+
+                 <form id="forgotForm">
+                      <label for="forgot-email">Email</label>
+                      <input type="email" id="forgot-email" placeholder="syahrul@gmail.com" required />
+                      <button type="submit" class="btn-primary">Kirim Kode Reset</button> 
+                 </form>
+
+                 <a href="#" class="back-link" id="back-to-login1">Back to Login</a>
+                 <footer>© 2025 Hot Chan’s Motor. All rights reserved.</footer>
+            </div>
+
+            <div id="otp-page" class="page hidden">
+                <h1>Lupa Password?</h1>
+                <p class="subtitle">
+                    Masukkan kode 6 digit dari email kamu untuk melanjutkan.
+                </p>
+
+                <div class="otp-wrapper"> 
+                    <div class="otp-container">
+                        <input maxlength="1" class="otp-input" />
+                        <input maxlength="1" class="otp-input" />
+                        <input maxlength="1" class="otp-input" />
+                        <input maxlength="1" class="otp-input" />
+                        <input maxlength="1" class="otp-input" />
+                        <input maxlength="1" class="otp-input" />
+                    </div>
+
+                    <p id="timer">04:59</p>
+
+                    <button id="confirm-otp" class="btn-primary">Konfirmasi</button>
+
+                    <p class="resend">
+                        Belum masuk juga? <span id="resend">Klik untuk kirim ulang kode.</span>
+                    </p>
+                </div>
+                <footer>© 2025 Hot Chan’s Motor. All rights reserved.</footer>
+            </div>
+
+            <div id="newpass-page" class="page hidden">
+                <h1>Password Baru</h1>
+                <p class="subtitle">Masukkan Password Terbaru Untuk Mereset Emailmu</p>
+                
+                <form id="newPassForm" class="centered-form-card">
+                    <label for="new-password">Password</label>
+                    <input type="password" id="new-password" placeholder="Minimal 6 karakter" required />
+                    
+                    <label for="confirm-password">Konfirmasi Password</label>
+                    <input type="password" id="confirm-password" placeholder="Ulangi password baru" required /> 
+                    
+                    <button type="submit" class="btn-primary">Simpan Password Baru</button> 
+                </form>
+                
+                <footer>© 2025 Hot Chan’s Motor. All rights reserved.</footer>
+            </div>
+
+            <div id="success-page" class="page hidden">
+                <h1>Ganti Password Anda<br>Berhasil!</h1>
+                <p class="subtitle">Silakan login kembali dengan password baru Anda.</p>
+                <a href="#" class="back-link" id="back-to-login3">Back to Login</a>
+                <footer>© 2025 Hot Chan’s Motor. All rights reserved.</footer>
+            </div>
+
+        </div> 
+        
+        <div class="right-section">
+            <img src="../assets/gambar/login/gambar 1.png" alt="Ilustrasi Login" id="illustration"> 
+        </div>
+
+    </div>
+    
+    <script src="/assets/js/login.js"></script> 
+    <script src="/backend/login.js"></script>
+</body>
+</html>

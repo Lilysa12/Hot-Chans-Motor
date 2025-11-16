@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard | Hot Chan’s Motor</title>
+  <link rel="stylesheet" href="../assets/css/dashboard.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap"
+    rel="stylesheet" />
+</head>
+
+<body>
+  <div class="container dashboard-container">
+    <!-- ==== SIDEBAR ==== -->
+    <nav class="sidebar">
+      <div class="nav-top">
+        <h1 class="sidebar-logo">Hot Chan’s Motor</h1>
+        <ul class="nav-menu">
+          <li><a href="dashboard.html" class="nav-item active"><img src="../assets/gambar/icons/dashboard.png"
+                alt="Dashboard" /> <span>Dashboard</span></a></li>
+          <li><a href="databarang.html" class="nav-item"><img src="../assets/gambar/icons/data barang.png"
+                alt="Data Barang" /> <span>Data Barang</span></a></li>
+          <li><a href="barangmasuk.html" class="nav-item"><img src="../assets/gambar/icons/barang masuk.png"
+                alt="Barang Masuk" /> <span>Barang Masuk</span></a></li>
+          <li><a href="barangkeluar.html" class="nav-item"><img src="../assets/gambar/icons/barang keluar.png"
+                alt="Barang Keluar" /> <span>Barang Keluar</span></a></li>
+        </ul>
+      </div>
+      <div class="nav-bottom">
+        <span class="nav-section-title">Akun</span>
+        <ul class="nav-menu">
+          <li><a href="tentangkami.html" class="nav-item"><img src="../assets/gambar/icons/kelola toko.png"
+                alt="Tentang Kami" /> <span>Tentang Kami</span></a></li>
+          <li><a href="profile.html" class="nav-item"><img src="../assets/gambar/icons/profile.png" alt="Profile" />
+              <span>Profile</span></a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- ==== MAIN CONTENT ==== -->
+    <main class="main-content">
+      <div class="welcome-section">
+        <h1>Selamat Datang, Hot Chan’s Motor</h1>
+        <p>Kelola, perbarui, dan rapikan data Anda dengan mudah setiap hari.</p>
+      </div>
+
+      <!-- ==== SUMMARY CARDS ==== -->
+      <section class="summary-cards dashboard-stats">
+        <div class="card stat-card primary sticky-card">
+          <h4>Data Barang</h4>
+          <div class="stat-number" id="total-barang">0</div>
+        </div>
+        <div class="card stat-card">
+          <h4>Barang Masuk</h4>
+          <div class="stat-number" id="total-masuk">0</div>
+        </div>
+        <div class="card stat-card">
+          <h4>Barang Keluar</h4>
+          <div class="stat-number" id="total-keluar">0</div>
+        </div>
+      </section>
+
+      <!-- ==== TABEL BARANG MASUK ==== -->
+      <section class="table-section dashboard-table">
+        <div class="table-header">
+          <h3>Barang Masuk</h3>
+          <div class="showing">
+            <label for="limitMasuk">Lihat</label>
+            <select id="limitMasuk">
+              <option value="5" selected>5</option>
+              <option value="10">10</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="table-container">
+          <table id="tabelMasuk">
+            <thead>
+              <tr>
+                <th>Kode Barang</th>
+                <th>Nama Barang</th>
+                <th>Tanggal</th>
+                <th>Jumlah</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+
+        <div class="pagination">
+          <button class="page-nav" id="prevPageMasuk" disabled>Sebelumnya</button>
+          <div class="page-numbers" id="pageNumbersMasuk"></div>
+          <button class="page-nav" id="nextPageMasuk">Selanjutnya</button>
+        </div>
+      </section>
+
+      <!-- ==== TABEL BARANG KELUAR ==== -->
+      <section class="table-section dashboard-table">
+        <div class="table-header">
+          <h3>Barang Keluar</h3>
+          <div class="showing">
+            <label for="limitKeluar">Lihat</label>
+            <select id="limitKeluar">
+              <option value="5" selected>5</option>
+              <option value="10">10</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="table-container">
+          <table id="tabelKeluar">
+            <thead>
+              <tr>
+                <th>Kode Barang</th>
+                <th>Nama Barang</th>
+                <th>Tanggal</th>
+                <th>Jumlah</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+
+        <div class="pagination">
+          <button class="page-nav" id="prevPageKeluar" disabled>Sebelumnya</button>
+          <div class="page-numbers" id="pageNumbersKeluar"></div>
+          <button class="page-nav" id="nextPageKeluar">Selanjutnya</button>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- ==== SCRIPT SUPABASE ==== -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../index.js"></script>
+<script>
+
+  let currentPageMasuk = 1,
+    rowsPerPageMasuk = 5;
+  let currentPageKeluar = 1,
+    rowsPerPageKeluar = 5;
+
+  // === PERBAIKAN: Fungsi Statistik Dashboard ===
+  async function loadStats() {
+    try {
+      // Ambil total stok dari tabel barang_masuk
+      const { data: masukData, error: masukError } = await supabase
+        .from("barang_masuk")
+        .select("stok_barang");
+
+      if (masukError) throw masukError;
+
+      const totalMasuk = masukData.reduce(
+        (sum, item) => sum + (item.stok_barang || 0),
+        0
+      );
+
+      // Ambil total jumlah keluar dari tabel barang_keluar
+      const { data: keluarData, error: keluarError } = await supabase
+        .from("barang_keluar")
+        .select("jumlah_keluar");
+
+      if (keluarError) throw keluarError;
+
+      const totalKeluar = keluarData.reduce(
+        (sum, item) => sum + (item.jumlah_keluar || 0),
+        0
+      );
+
+      // Hitung total barang (stok akhir)
+      const totalBarang = totalMasuk - totalKeluar;
+
+      // Tampilkan ke dashboard
+      document.getElementById("total-barang").textContent = totalBarang || 0;
+      document.getElementById("total-masuk").textContent = totalMasuk || 0;
+      document.getElementById("total-keluar").textContent = totalKeluar || 0;
+    } catch (err) {
+      console.error("Gagal memuat data statistik:", err.message);
+    }
+  }
+
+//  
+  // async function loadBarangMasuk(page = 1, limit = 5) {
+  //   currentPageMasuk = page;
+  //   rowsPerPageMasuk = limit;
+  //   const rangeFrom = (page - 1) * limit;
+  //   const rangeTo = page * limit - 1;
+  //   const tabelMasukBody = document.querySelector("#tabelMasuk tbody");
+
+  //   tabelMasukBody.innerHTML = `<tr><td colspan="4" style="text-align:center;">Memuat...</td></tr>`;
+
+  //   const { data, error, count } = await supabase
+  //     .from("barang_masuk")
+  //     .select("*", { count: "exact" })
+  //     .order("tanggal", { ascending: false })
+  //     .range(rangeFrom, rangeTo);
+
+  //   tabelMasukBody.innerHTML = "";
+  //   if (error) {
+  //     tabelMasukBody.innerHTML = `<tr><td colspan="4">Gagal memuat data.</td></tr>`;
+  //     return;
+  //   }
+
+  //   data.forEach((item) => {
+  //     tabelMasukBody.innerHTML += `
+  //       <tr>
+  //         <td>${item.kode_barang}</td>
+  //         <td>${item.nama_barang}</td>
+  //         <td><span class="date-highlight">${new Date(
+  //           item.tanggal
+  //         ).toLocaleDateString("id-ID")}</span></td>
+  //         <td>${
+  //           item.stok_barang
+  //             ? `<span class="quantity-green">+${item.stok_barang}</span>`
+  //             : "-"
+  //         }</td>
+  //       </tr>`;
+  //   });
+
+  //   updatePagination("Masuk", count, page, limit);
+  // }
+
+  async function loadBarangMasuk(page = 1, limit = 5) {
+    currentPageMasuk = page;
+    rowsPerPageMasuk = limit;
+    const rangeFrom = (page - 1) * limit;
+    const rangeTo = page * limit - 1;
+    const tabelKeluarBody = document.querySelector("#tabelMasuk tbody");
+
+    tabelKeluarBody.innerHTML = `<tr><td colspan="4" style="text-align:center;">Memuat...</td></tr>`;
+
+    const { data, error, count } = await supabase
+      .from("barang_masuk")
+      .select("id_barang, tanggal, stok_barang, data_barang(nama_barang, kode_barang)", { count: "exact" })
+      .order("tanggal", { ascending: false })
+      .range(rangeFrom, rangeTo);
+
+    tabelKeluarBody.innerHTML = "";
+    if (error) {
+      tabelKeluarBody.innerHTML = `<tr><td colspan="4">Gagal memuat data.</td></tr>`;
+      return;
+    }
+
+    data.forEach((item) => {
+      tabelKeluarBody.innerHTML += `
+        <tr>
+          <td>${item.data_barang.kode_barang}</td>
+          <td>${item.data_barang.nama_barang}</td>
+          <td><span class="date-highlight">${new Date(
+            item.tanggal
+          ).toLocaleDateString("id-ID")}</span></td>
+          <td>${
+            item.stok_barang
+              ? `<span class="" style="color:green">${item.stok_barang}</span>`
+              : "-"
+          }</td>
+        </tr>`;
+    });
+
+    updatePagination("Masuk", count, page, limit);
+  }
+
+  // === TABEL BARANG KELUAR ===
+  async function loadBarangKeluar(page = 1, limit = 5) {
+    currentPageKeluar = page;
+    rowsPerPageKeluar = limit;
+    const rangeFrom = (page - 1) * limit;
+    const rangeTo = page * limit - 1;
+    const tabelKeluarBody = document.querySelector("#tabelKeluar tbody");
+
+    tabelKeluarBody.innerHTML = `<tr><td colspan="4" style="text-align:center;">Memuat...</td></tr>`;
+
+    const { data, error, count } = await supabase
+      .from("barang_keluar")
+      .select("id_barang, tanggal, jumlah_keluar, data_barang(nama_barang, kode_barang)", { count: "exact" })
+      .order("tanggal", { ascending: false })
+      .range(rangeFrom, rangeTo);
+
+    tabelKeluarBody.innerHTML = "";
+    if (error) {
+      tabelKeluarBody.innerHTML = `<tr><td colspan="4">Gagal memuat data.</td></tr>`;
+      return;
+    }
+
+    data.forEach((item) => {
+      tabelKeluarBody.innerHTML += `
+        <tr>
+          <td>${item.data_barang.kode_barang}</td>
+          <td>${item.data_barang.nama_barang}</td>
+          <td><span class="date-highlight">${new Date(
+            item.tanggal
+          ).toLocaleDateString("id-ID")}</span></td>
+          <td>${
+            item.jumlah_keluar
+              ? `<span class="quantity-red">${item.jumlah_keluar}</span>`
+              : "-"
+          }</td>
+        </tr>`;
+    });
+
+    updatePagination("Keluar", count, page, limit);
+  }
+
+  // === PAGINATION ===
+  function updatePagination(type, totalCount, page, limit) {
+    const totalPages = Math.ceil(totalCount / limit);
+    const prefix = type === "Masuk" ? "Masuk" : "Keluar";
+    const pageNumbers = document.getElementById(`pageNumbers${prefix}`);
+    const prev = document.getElementById(`prevPage${prefix}`);
+    const next = document.getElementById(`nextPage${prefix}`);
+
+    pageNumbers.innerHTML = "";
+    prev.disabled = page === 1;
+    next.disabled = page === totalPages || totalPages === 0;
+
+    const maxPagesToShow = 5;
+    let startPage = Math.max(1, page - 1);
+    let endPage = Math.min(totalPages, startPage + maxPagesToShow - 1);
+
+    if (endPage === totalPages) {
+      startPage = Math.max(1, totalPages - maxPagesToShow + 1);
+    }
+
+    for (let i = startPage; i <= endPage; i++) {
+      const span = document.createElement("span");
+      span.textContent = i < 10 ? `0${i}` : i;
+      if (i === page) span.classList.add("active");
+      span.addEventListener("click", () => {
+        type === "Masuk"
+          ? loadBarangMasuk(i, limit)
+          : loadBarangKeluar(i, limit);
+      });
+      pageNumbers.appendChild(span);
+    }
+  }
+
+  // === JALANKAN SEMUA SAAT HALAMAN DIBUKA ===
+  document.addEventListener("DOMContentLoaded", () => {
+    loadStats();
+    loadBarangMasuk(currentPageMasuk, rowsPerPageMasuk);
+    loadBarangKeluar(currentPageKeluar, rowsPerPageKeluar);
+
+    document
+      .getElementById("prevPageMasuk")
+      .addEventListener("click", () =>
+        loadBarangMasuk(currentPageMasuk - 1, rowsPerPageMasuk)
+      );
+    document
+      .getElementById("nextPageMasuk")
+      .addEventListener("click", () =>
+        loadBarangMasuk(currentPageMasuk + 1, rowsPerPageMasuk)
+      );
+    document
+      .getElementById("limitMasuk")
+      .addEventListener("change", (e) =>
+        loadBarangMasuk(1, parseInt(e.target.value))
+      );
+
+    document
+      .getElementById("prevPageKeluar")
+      .addEventListener("click", () =>
+        loadBarangKeluar(currentPageKeluar - 1, rowsPerPageKeluar)
+      );
+    document
+      .getElementById("nextPageKeluar")
+      .addEventListener("click", () =>
+        loadBarangKeluar(currentPageKeluar + 1, rowsPerPageKeluar)
+      );
+    document
+      .getElementById("limitKeluar")
+      .addEventListener("change", (e) =>
+        loadBarangKeluar(1, parseInt(e.target.value))
+      );
+  });
+</script>
+
+
+  <script src="../assets/js/barangsuka.js"></script>
+  <!-- <script src="../backend/barangMasuk.js"></script> -->
+</body>
+
+</html>

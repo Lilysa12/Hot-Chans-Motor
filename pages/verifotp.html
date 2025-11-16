@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Verifikasi OTP</title>
+</head>
+<body>
+
+<h2>Kirim OTP ke Email</h2>
+<input type="email" id="email" placeholder="Masukkan email">
+<button onclick="sendOTP()">Kirim OTP</button>
+
+<hr>
+
+<h3>Masukkan OTP</h3>
+<input type="text" id="otp" placeholder="6 digit OTP">
+<button onclick="verifyOTP()">Verifikasi OTP</button>
+
+<script>
+async function sendOTP() {
+    const email = document.getElementById("email").value;
+
+    if (!email) {
+        alert("Email tidak boleh kosong!");
+        return;
+    }
+
+    const res = await fetch("/api/sendotp", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email })
+    });
+
+    const data = await res.json();
+    alert(data.message);
+}
+
+async function verifyOTP() {
+    const email = document.getElementById("email").value;
+    const kode = document.getElementById("otp").value;
+
+    if (!email || !kode) {
+        alert("Email dan OTP harus diisi!");
+        return;
+    }
+
+    const res = await fetch("/api/verifotp", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, kode })
+    });
+
+    const data = await res.json();
+    alert(data.message);
+}
+</script>
+<script src="../assets/js/verifptp.js"></script>
+</body>
+</html>

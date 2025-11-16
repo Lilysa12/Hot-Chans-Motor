@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tentang Kami - Hot Chan's Motor</title>
+    
+    <link rel="stylesheet" href="../assets/css/tentangkami.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="container"> 
+        
+        <nav class="sidebar">
+            <div class="nav-top">
+                <h1 class="sidebar-logo">Hot Chan’s Motor</h1>
+                <ul class="nav-menu">
+                    <li>
+                        <a href="dashboard.html" class="nav-item">
+                            <img src="../assets/gambar/icons/dashboard.png" alt="Dashboard"> <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="databarang.html" class="nav-item">
+                             <img src="../assets/gambar/icons/data barang.png" alt="Data Barang"> <span>Data Barang</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="barangmasuk.html" class="nav-item">
+                             <img src="../assets/gambar/icons/barang masuk.png" alt="Barang Masuk"> <span>Barang Masuk</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="barangkeluar.html" class="nav-item">
+                             <img src="../assets/gambar/icons/barang keluar.png" alt="Barang Keluar"> <span>Barang Keluar</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="nav-bottom">
+                <span class="nav-section-title">Akun</span>
+                <ul class="nav-menu">
+                    <li>
+                        <a href="tentangkami.html" class="nav-item active"> 
+                             <img src="../assets/gambar/icons/kelola toko.png" alt="Tentang Kami"> <span>Tentang Kami</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="profile.html" class="nav-item"> 
+                             <img src="../assets/gambar/icons/profile.png" alt="Profile"> <span>Profile</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <main class="main-content">
+            
+            <header class="page-header">
+                <h1>Kenali Perjalanan Hot Chan's Motor</h1>
+                <p class="subtitle">Dari langkah kecil menjadi toko tepercaya — inilah perjalanan kami dalam dunia otomotif.</p>
+            </header>
+
+            <div class="card blue-card">
+    <h2>Tentang Kami</h2>
+</div>
+
+            <div class="content-layout">
+                
+                <div class="card about-card">
+                    <h3>Cerita Kami</h3>
+                    <p>
+                        Perjalanan Hot Chan's Motor dimulai dari sebuah ide sederhana yang lahir secara tidak sengaja. Saat itu, di sebelah rumah saya ada seorang montir dinamo yang menyewa tempat tinggal. Dari situ saya menyadari bahwa banyak konsumen kesulitan mendapatkan perlengkapan kecil seperti isolasi, kabel, dan bola lampu, karena harus membelinya ke tempat yang cukup jauh. Melihat peluang tersebut, saya pun tergerak untuk membuka usaha kecil yang dapat menyediakan kebutuhan dasar bagi para montir dan masyarakat sekitar. Seiring berjalannya waktu, usaha kecil ini berkembang pesat. Jenis barang yang dijual semakin beragam menyesuaikan dengan permintaan pelanggan — mulai dari col cas, col starter, hingga berbagai komponen kendaraan seperti oli, rem, kabel, dan perlengkapan lainnya.
+                    </p>
+                    <p>
+                        Toko ini resmi berdiri pada tahun 2002 dalam bentuk kios sederhana berukuran 3 x 8 meter. Kemudian, seiring dengan meningkatnya permintaan dan bertambahnya stok barang, pada tahun 2007 toko dipindahkan ke bangunan permanen berukuran 5 x 25 meter agar dapat menampung lebih banyak produk. Kini, Hot Chan's Motor terus berkembang menjadi toko spare part tepercaya di Sanbudilok dan sekitarnya, dengan komitmen untuk selalu menghadirkan produk berkualitas dan pelayanan terbaik bagi setiap pelanggan.
+                    </p>
+                </div>
+
+                <aside class="right-column">
+                    <div class="card fact-card">
+                        <h4>Fakta Singkat</h4>
+                        <ul>
+                            <li><strong>Tahun Berdiri:</strong> 2002</li>
+                            <li><strong>Lokasi:</strong> Saribudolok</li>
+                            <li><strong>Ukuran Awal:</strong> 3 x 8 meter</li>
+                            <li><strong>Ukuran Sekarang:</strong> 5 x 25 meter</li>
+                        </ul>
+                        
+                        <h4>Jam Operasional</h4>
+                        <ul>
+                            <li><strong>Senin - Sabtu:</strong> 09:00 - 18:30</li>
+                        </ul>
+                        </div>
+                </aside>
+
+            </div>
+
+        </main>
+    </div>
+
+    <div id="edit-toko-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>Edit Cerita Toko</h2>
+            <form id="edit-toko-form">
+                <label for="shop-story">Cerita Toko:</label>
+                <textarea id="shop-story" rows="15">...</textarea>
+                <div class="modal-buttons">
+                    <button type="button" class="btn-cancel">Batal</button>
+                    <button type="submit" class="btn-save">Simpan Perubahan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <script src="../assets/js/tentangkami.js"></script>
+</body>
+</html>

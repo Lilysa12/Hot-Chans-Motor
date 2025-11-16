@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Barang Keluar - Hot Chan's Motor</title>
+
+    <link rel="stylesheet" href="../assets/css/barangkeluar.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+</head>
+<body>
+    <div class="container">
+        <nav class="sidebar">
+            <div class="nav-top">
+                <h1 class="sidebar-logo">Hot Chan's Motor</h1>
+                <ul class="nav-menu">
+                    <li>
+                        <a href="dashboard.html" class="nav-item">
+                            <img src="../assets/gambar/icons/dashboard.png" alt="Dashboard" />
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="databarang.html" class="nav-item">
+                            <img src="../assets/gambar/icons/data barang.png" alt="Data Barang" />
+                            <span>Data Barang</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="barangmasuk.html" class="nav-item">
+                            <img src="../assets/gambar/icons/barang masuk.png" alt="Barang Masuk" />
+                            <span>Barang Masuk</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="barangkeluar.html" class="nav-item active">
+                            <img src="../assets/gambar/icons/barang keluar.png" alt="Barang Keluar" />
+                            <span>Barang Keluar</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="nav-bottom">
+                <span class="nav-section-title">Akun</span>
+                <ul class="nav-menu">
+                    <li>
+                        <a href="tentangkami.html" class="nav-item">
+                            <img src="../assets/gambar/icons/kelola toko.png" alt="Tentang Kami" />
+                            <span>Tentang Kami</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="profile.html" class="nav-item">
+                            <img src="../assets/gambar/icons/profile.png" alt="Profile" />
+                            <span>Profile</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <main class="main-content">
+            <header>
+                <h2>Pantau Semua Barang Keluar di Satu Tampilan</h2>
+                <p>Pastikan setiap suku cadang dan perlengkapan tercatat rapi agar stok selalu terkontrol.</p>
+            </header>
+
+            <section class="summary-cards">
+                <div class="card card-blue">
+                    <span>Barang Keluar</span>
+                    <span class="number" id="total-barang">0</span>
+                </div>
+
+                <div class="card card-action">
+                    <h3>Tambah Barang</h3>
+                    <button class="btn-primary" id="open-add-modal">+ Tambah Disini</button>
+                </div>
+
+                <div class="card card-action">
+                    <h3>Cetak Barang</h3>
+                    <button class="btn-primary" id="open-print-modal">
+                        <i class="fa-solid fa-print"></i> Cetak Disini
+                    </button>
+                </div>
+            </section>
+
+            <section class="table-section">
+                <div class="table-header">
+                    <h3>Barang Keluar</h3>
+                    <div class="table-controls">
+                        <div class="show-entries">
+                            <span>Lihat</span>
+                            <select name="rows-per-page" id="rows-per-page">
+                                <option value="10">10</option>
+                                <option value="25">25</option>
+                                <option value="50">50</option>
+                            </select>
+                        </div>
+
+                        <div class="search-bar">
+                            <img src="../assets/gambar/icons/cari.png" alt="Cari" />
+                            <input type="text" id="searchInput" placeholder="Cari..." />
+                        </div>
+                    </div>
+                </div>
+
+                <h2 class="print-title">Laporan Barang Keluar</h2>
+
+                <div class="table-container">
+                    <table id="main-table">
+                        <thead>
+                            <tr>
+                                <th>Kode Barang</th>
+                                <th>Nama Barang</th>
+                                <th>Tanggal</th>
+                                <th>Waktu</th>
+                                <th>Jumlah Keluar</th>
+                                <th class="action-col">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-body">
+                            </tbody>
+                    </table>
+                </div>
+
+                <div class="pagination" id="pagination-controls">
+                    </div>
+            </section>
+        </main>
+    </div>
+
+    <div class="modal-overlay" id="modal-overlay" aria-hidden="true">
+        <div class="modal-content" id="add-modal" role="dialog" aria-modal="true" aria-labelledby="add-modal-title">
+            <span class="close-modal" aria-label="Tutup">&times;</span>
+            <h2 class="modal-title" id="add-modal-title"><i class="fa-solid fa-plus-circle"></i> Tambah Barang Keluar</h2>
+            <form id="add-form">
+                <div class="form-group full-width">
+                    <label for="add-kode">Kode Barang</label>
+                    <select id="add-kode" required>
+                        <option value="">-- Pilih Kode Barang --</option>
+                    </select>
+                </div>
+
+                <div class="form-group full-width">
+                    <label for="add-nama">Nama Barang</label>
+                    <select id="add-nama" required>
+                        <option value="">-- Pilih Nama Barang --</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="add-tanggal">Tanggal</label>
+                    <input type="date" id="add-tanggal" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="add-waktu">Waktu</label>
+                    <input type="time" id="add-waktu" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="add-jumlah">Jumlah Keluar</label>
+                    <input type="number" id="add-jumlah" required min="1" />
+                </div>
+
+                <button type="submit" class="btn-primary full-width-btn">+ Tambah Disini</button>
+            </form>
+        </div>
+
+        <div class="modal-content" id="print-modal" role="dialog" aria-modal="true" aria-labelledby="print-modal-title">
+            <span class="close-modal" aria-label="Tutup">&times;</span>
+            <h2 class="modal-title" id="print-modal-title"><i class="fa-solid fa-print"></i> Cetak Barang Keluar</h2>
+            <form id="print-form">
+                <div class="form-group full-width">
+                    <label for="print-bulan">Bulan</label>
+                    <div class="input-with-icon">
+                        <input type="month" id="print-bulan" />
+                        <i class="fa-solid fa-calendar-days" id="print-bulan-icon" style="cursor:pointer;"></i>
+                    </div>
+                </div>
+
+                <div class="form-actions-row">
+                    <button type="button" class="btn-secondary" id="reset-print">Reset</button>
+                    <button type="submit" class="btn-primary" id="submit-print">Cetak</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="modal-content" id="edit-modal" role="dialog" aria-modal="true" aria-labelledby="edit-modal-title">
+            <span class="close-modal" aria-label="Tutup">&times;</span>
+            <h2 class="modal-title" id="edit-modal-title">
+                <img src="../assets/gambar/icons/edit.png" alt="Edit" style="height:1.2em; vertical-align:middle; margin-right:8px" />
+                Edit Barang
+            </h2>
+
+            <form id="edit-form">
+                <input type="hidden" id="edit-id" />
+                <div class="form-group full-width">
+                    <label for="edit-kode">Kode barang</label>
+                    <input type="text" id="edit-kode" readonly />
+                </div>
+
+                <div class="form-group full-width">
+                    <label for="edit-nama">Nama Barang</label>
+                    <input type="text" id="edit-nama" />
+                </div>
+
+                <div class="form-group">
+                    <label for="edit-tanggal">Tanggal</label>
+                    <div class="input-with-icon">
+                        <input type="date" id="edit-tanggal" />
+                        <i class="fa-solid fa-calendar-days" style="pointer-events:none;"></i>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="edit-waktu">Waktu</label>
+                    <input type="time" id="edit-waktu" />
+                </div>
+
+                <div class="form-group full-width">
+                    <label for="edit-jumlah">Jumlah Keluar</label>
+                    <input type="number" id="edit-jumlah" min="1" />
+                </div>
+
+                <button type="submit" class="btn-primary full-width-btn" id="save-edit"># Simpan Perubahan</button>
+            </form>
+        </div>
+
+        <div class="modal-content delete-confirm-modal" id="delete-modal" role="dialog" aria-modal="true" aria-labelledby="delete-modal-title">
+            <h2 class="modal-title delete-title" id="delete-modal-title">Yakin Mau Hapus?</h2>
+            <p class="delete-message">Dengan mengklik hapus, maka data kamu akan hilang</p>
+            <div class="form-actions-row">
+                <button type="button" class="btn-secondary" id="cancel-delete">Batal</button>
+                <button type="button" class="btn-primary btn-delete-red" id="confirm-delete" data-id="">Hapus</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../api/barangKeluar.js"></script>
+    <script src="../assets/js/barangkeluar.js"></script>
+</body>
+</html>

@@ -1,0 +1,382 @@
+/* ==================================== */
+/* 1. GLOBAL & RESET */
+/* ==================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", "Inter", sans-serif;
+}
+
+body {
+  background-color: #f7f9fc;
+  min-height: 100dvh; /* modern */
+  min-height: 100vh;  /* fallback untuk browser lama */
+}
+
+.dashboard-container {
+  display: flex;
+  width: 100%;
+}
+
+/* ==================================== */
+/* 2. SIDEBAR (PERBAIKAN TOTAL) */
+/* ==================================== */
+.sidebar {
+  width: 230px;
+  background: #1f6eff;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  flex-shrink: 0;
+  min-height: 100dvh;
+  min-height: 100vh; /* fallback */
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 200;
+  overflow-y: auto;
+}
+
+.sidebar-logo {
+  font-weight: 700;
+  font-size: 18px;
+  margin-bottom: 40px;
+  padding-left: 10px;
+  color: #ffffff;
+}
+
+/* NAVIGATION */
+.nav-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-menu li {
+  margin-bottom: 8px;
+}
+
+.nav-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 12px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s, color 0.2s;
+  text-decoration: none;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 400;
+}
+
+.nav-item:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.nav-item img {
+  width: 18px;
+  height: 18px;
+  margin-right: 12px;
+  filter: brightness(0) invert(1);
+  opacity: 0.9;
+  transition: filter 0.3s, opacity 0.3s;
+}
+
+.nav-item.active {
+  background: #ffffff;
+  color: #1f6eff;
+  font-weight: 600;
+}
+
+.nav-item.active span {
+  color: #1f6eff;
+}
+
+.nav-item.active img {
+  filter: none;
+  opacity: 1;
+}
+
+/* Bagian bawah sidebar */
+.nav-bottom {
+  margin-top: 30px;
+  padding-top: 0;
+  position: relative;
+  margin-left: 0;
+  margin-right: 0;
+  border-top: none;
+}
+
+.nav-section-title {
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 10px;
+  opacity: 0.8;
+  padding-left: 10px;
+  display: block;
+}
+
+
+.main-content {
+  margin-left: 230px;
+  flex: 1;
+  padding: 30px 40px;
+  background: #ffffff;
+  border-top-left-radius: 20px;
+  overflow-y: auto;
+}
+
+/* Styling untuk judul & deskripsi di halaman utama */
+/* Styling untuk judul & deskripsi di halaman utama */
+.main-content .welcome-section h1 {
+  color: #4179F5 !important; /* <-- TAMBAHKAN !important */
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  font-family: "Poppins", "Inter", sans-serif;
+}
+
+.main-content .welcome-section p {
+  color: #BDBDBD !important;
+  font-size: 16px;
+  font-weight: 400;
+  font-family: "Poppins", "Inter", sans-serif;
+}
+
+
+.summary-cards {
+  display: flex;
+  gap: 25px;
+  margin-top: 25px;
+  align-items: flex-start;
+}
+
+.card.stat-card {
+  width: 267px;
+  height: 169px;
+  background: #f5f5f5;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* perbaikan: gunakan flex-start */
+  align-items: flex-start;     /* perbaikan: gunakan flex-start */
+  padding: 25px 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.06);
+  transition: transform 0.2s ease;
+}
+
+.card.stat-card:hover {
+  transform: translateY(-4px);
+}
+
+.card.stat-card.primary {
+  background: linear-gradient(135deg, #C5DBF8 0%, #0A51C4 100%);
+  color: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.card.stat-card h4 {
+  font-weight: 600;
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: #2a6df5;
+}
+
+.card.stat-card.primary h4 {
+  color: #ffffff;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  margin-bottom: 10px;
+  text-align: left;
+  /* justify-content dihapus karena h4 bukan flex container */
+}
+
+.stat-number {
+  font-size: 64px;
+  font-weight: 600;
+  color: #2a6df5;
+  line-height: 1;
+}
+
+.card.stat-card.primary .stat-number {
+  color: #ffffff;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  font-size: 64px;
+  line-height: 1;
+  text-align: left;
+}
+
+/* ==================================== */
+/* 5. TABLE */
+/* ==================================== */
+.table-section {
+  margin-top: 35px;
+  margin-bottom: 35px;
+  background: #fdfdfd;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.05);
+}
+
+/* REVISI 1: HEADER TABEL */
+.table-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  padding: 0 15px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #dcdcdc;
+  min-height: 40px;
+}
+
+.table-header h3 {
+  position: absolute;
+  left: 15px;
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  color: #1F6EFF;
+}
+
+.showing {
+  background-color: #f2f2f2;
+  border-radius: 8px;
+  padding: 4px 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.showing label {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  color: #1F6EFF;
+}
+
+.showing select {
+  border: none;
+  background-color: #e8e8e8;
+  border-radius: 6px;
+  padding: 4px 8px;
+  font-weight: 500;
+  color: #1F6EFF;
+  cursor: pointer;
+}
+
+.table-container table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 15px;
+  color: #000;
+  border-top: 1px solid #dcdcdc;
+  border-bottom: 1px solid #dcdcdc;
+}
+
+.table-container thead {
+  background-color: #f5f7fa;
+  border-bottom: 1px solid #dcdcdc;
+}
+
+.table-container th,
+.table-container td {
+  padding: 12px 18px;
+  border-bottom: 1px solid #e2e2e2;
+  text-align: center;
+}
+
+/* Buat kolom ke-2 (Nama Barang) rata kiri */
+.table-container th:nth-child(2),
+.table-container td:nth-child(2) {
+  text-align: left;
+}
+
+.table-container th {
+  font-weight: 600;
+  color: #333;
+}
+
+span.date-highlight {
+  background-color: #f5f5f5;
+  border-radius: 6px;
+  padding: 8px 12px;
+  display: inline-block;
+}
+
+span.quantity-red {
+  color: #FF0000;
+  font-weight: 400;
+}
+
+span.quantity-green {
+  color: #00FF04;
+  font-weight: 400;
+}
+
+/* ==================================== */
+/* 6. PAGINATION */
+/* ==================================== */
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fafafa;
+  border-radius: 6px;
+  padding: 8px 15px;
+  font-size: 14px;
+  color: #666;
+  margin-top: 10px;
+  border-top: 1px solid #dcdcdc;
+}
+
+.page-nav {
+  background-color: #f2f2f2;
+  color: #1F6EFF;
+  border: none;
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.page-nav:hover {
+  background-color: #e0e0e0;
+}
+
+.page-numbers span {
+  padding: 0 8px;
+}
+
+.page-numbers span.active {
+  color: #1F6EFF;
+  font-weight: 600;
+}
+
+/* === BIAR CARD BIRU TIDAK IKUT SCROLL === */
+.sticky-card {
+  position: fixed;
+  top: 20px;
+  align-self: flex-start;
+  z-index: 10;
+}
+
+/* === Card biru tetap diam di atas saat scroll === */
+.summary-cards .card.stat-card:first-child {
+  position: sticky;
+  top: 20px;
+  z-index: 100;
+}
+
+/* ==================== */
+/* PERBAIKAN WARNA TEKS (DUPLIKAT) */
+/* ==================== */
+/* Duplikat aturan yang tidak perlu sudah dihapus */

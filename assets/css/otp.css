@@ -1,0 +1,174 @@
+/* PENGATURAN GLOBAL */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* Wrapper Utama - SEKARANG COLUMN UNTUK MENATA HEADER DAN CARD */
+.otp-page-wrapper {
+    flex-grow: 1;
+    width: 100%;
+    display: flex;
+    flex-direction: column; /* Mengatur item dari atas ke bawah */
+    justify-content: center;
+    align-items: center;
+    padding-top: 50px; /* Jarak dari atas (opsional) */
+}
+
+/* Header di Luar Card */
+.header-content {
+    text-align: center;
+    max-width: 580px; /* Lebar sama dengan card */
+    margin-bottom: 25px; /* Jarak antara teks dan card */
+}
+
+h1 {
+    font-size: 2.5em;
+    font-weight: 700;
+    color: #000;
+    margin: 0;
+}
+
+.subtitle {
+    font-size: 1em;
+    color: #555;
+    margin-top: 5px; /* Jarak kecil di bawah judul */
+    margin-bottom: 0;
+}
+
+/* Kotak Konten (Wrapper Abu-abu Muda) */
+.otp-content-card {
+    background-color: #f8f8f8;
+    border-radius: 12px;
+    padding: 35px 50px; /* Padding card yang ringkas */
+    max-width: 580px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* OTP INPUTS */
+.otp-container {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 5px; /* Jarak di atas input */
+    margin-bottom: 10px;
+}
+
+.otp-input {
+    width: 55px;
+    height: 70px;
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+    font-size: 1.8em;
+    text-align: center;
+    outline: none;
+    transition: border-color 0.2s;
+    background-color: white;
+    -moz-appearance: textfield;
+}
+
+.otp-input:focus {
+    border-color: #4a90e2;
+    outline: none;
+}
+
+.otp-input::-webkit-inner-spin-button,
+.otp-input::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* TIMER & TOMBOL */
+#timer {
+    font-size: 0.9em;
+    color: #555;
+    margin: 10px 0 15px 0;
+}
+
+.btn-primary {
+    width: 100%;
+    padding: 15px;
+    background-color: #4179F5;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 10px;
+}
+
+.btn-primary:hover:not(:disabled) {
+    background-color: #3a7ecd;
+}
+
+.btn-primary:disabled {
+    background-color: #4a90e2;
+    cursor: not-allowed;
+    opacity: 1;
+}
+
+/* LINK KIRIM ULANG */
+.resend-text {
+    font-size: 0.9em;
+    color: #888;
+    margin-top: 20px;
+}
+
+.resend-text span {
+    color: #4a90e2;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.resend-link-disabled {
+    color: #4179F5 !important;
+    pointer-events: none;
+    cursor: default !important;
+}
+
+/* FOOTER & RESPONSIVE */
+footer {
+    font-size: 0.8em;
+    color: #aaa;
+    padding-bottom: 20px;
+}
+
+@media (max-width: 600px) {
+    .header-content {
+        max-width: 90%;
+    }
+
+    .otp-content-card {
+        max-width: 90%;
+        padding: 30px 20px;
+    }
+
+    .otp-container {
+        gap: 8px;
+    }
+
+    .otp-input {
+        width: 40px;
+        height: 55px;
+        font-size: 1.5em;
+    }
+}

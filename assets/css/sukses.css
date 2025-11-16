@@ -1,0 +1,178 @@
+/* ==== PENGATURAN GLOBAL ==== */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f4f7f6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* ==== CONTAINER UTAMA ==== */
+.container {
+    display: flex;
+    width: 100%;
+    min-height: 100vh;
+    background-color: #fff;
+    overflow: hidden;
+}
+
+/* ==== BAGIAN FORM ==== */
+.form-section {
+    width: 50%;
+    padding: 60px 40px 60px 120px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.content-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    flex-grow: 1;
+}
+
+/* ==== LOGO ==== */
+.brand-name {
+    font-size: 1.5em;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 50px;
+    word-spacing: 3px;
+}
+
+/* ==== KONTEN UTAMA ==== */
+.main-content {
+    width: 100%;
+    max-width: 520px; /* tambahkan sedikit ruang agar cukup 1 baris */
+    margin-right: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+/* === Judul "Ganti Password Anda Berhasil!" === */
+.title-success {
+    font-size: 2.5em; /* sedikit lebih kecil agar 1 baris cukup */
+    font-weight: 800;
+    color: #000;
+    line-height: 1.5;
+    margin-top: 0;
+    margin-bottom: 10px;
+    word-spacing: 3px; /* kasih jarak antar kata */
+}
+
+.highlight-success {
+    display: block; /* "Berhasil!" pindah baris sendiri */
+    color: #000;
+}
+
+/* === Subjudul === */
+.subtitle {
+    font-size: 1em;
+    color: #666;
+    margin-bottom: 30px;
+    white-space: normal;
+    max-width: 100%; /* dari 350px → biar cukup 1 baris */
+    line-height: 1.6; /* biar rapi jika di layar kecil */
+}
+
+/* === Link "Back to Login" === */
+.link-login {
+    display: inline-block;
+    font-weight: 600;
+    color: #4a90e2;
+    text-decoration: none;
+    font-size: 1em;
+    transition: color 0.3s;
+    margin-top: 5px;
+}
+
+.link-login:hover {
+    color: #1558cc;
+}
+
+/* ==== COPYRIGHT ==== */
+.bottom-content {
+    margin-top: 40px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.copyright {
+    font-size: 0.85em;
+    color: #aaa;
+    text-align: center;
+    margin: 0;
+    padding-bottom: 40px; /* tidak terlalu bawah */
+}
+
+/* ==== BAGIAN GAMBAR ==== */
+.image-section {
+    width: 50%;
+    background: linear-gradient(135deg, #6BCBFF 0%, #4388FF 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.illustration-image {
+    max-width: 80%;
+    height: auto;
+    filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.2));
+}
+
+/* ==== RESPONSIF ==== */
+@media (max-width: 980px) {
+    .image-section {
+        display: none;
+    }
+
+    .form-section {
+        width: 100%;
+        padding: 40px 20px;
+        align-items: center;
+        text-align: center;
+    }
+
+    .brand-name {
+        align-self: flex-start;
+        margin-left: 0;
+        margin-right: auto;
+    }
+
+    .main-content {
+        max-width: 90%;
+        margin: 50px auto;
+        align-items: center;
+        text-align: center;
+    }
+
+    .bottom-content {
+        width: 90%;
+        justify-content: center;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .copyright {
+        text-align: center;
+        padding-bottom: 30px;
+    }
+}

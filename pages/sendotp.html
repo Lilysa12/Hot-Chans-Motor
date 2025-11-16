@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Send OTP</title>
+</head>
+<body>
+
+  <h2>Masukkan email</h2>
+  <input id="email" type="email" placeholder="hotchansmotor@gmail.com"/>
+  <button id="sendBtn">Kirim OTP</button>
+
+<script>
+document.getElementById("sendBtn").addEventListener("click", async () => {
+    const email = document.getElementById("email").value;
+
+    if (!email) {
+        alert("Email tidak boleh kosong!");
+        return;
+    }
+
+    const res = await fetch("/api/sendotp", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email })
+    });
+
+    const data = await res.json();
+    alert(data.message);
+});
+</script>
+<script src="../assets/js/otp.js"></script>
+<script src="../api/lupapw.js"></script>
+<script src="../api/sendotp.js"></script>
+
+</body>
+</html>
