@@ -1,53 +1,84 @@
 document.addEventListener("DOMContentLoaded", async () => {
+// Menjalankan kode setelah halaman web selesai dimuat.
+
     // ==========================
     // KONFIGURASI SUPABASE
     // ==========================
     const SUPABASE_URL = "https://cwvcprzdovbpteiuuvgj.supabase.co";
+    // Alamat project Supabase (Berisi database).
     const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN3dmNwcnpkb3ZicHRlaXV1dmdqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjI3NzEwODYsImV4cCI6MjA3ODM0NzA4Nn0.Poi74Rm2rWUWGeoUTmP2CR5zlT_YqnY9j_OdjVz3tFw";
+    // Kunci untuk mengakses Supabase dari website (khusus role anon).
     const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    // Membuat koneksi ke Supabase sehingga website bisa baca/tulis data.
 
     // ==========================
     // DEKLARASI VARIABEL UNTUK PAGINATION & SEARCH
     // (Asumsi ID HTML sama dengan Barang Keluar)
     // ==========================
     const tableBody = document.getElementById("table-body");
+    // Mengambil elemen <tbody> tempat data tabel akan ditampilkan.
     const rowsPerPageSelect = document.getElementById("rows-per-page"); 
+    // Mengambil elemen dropdown yang menentukan jumlah baris per halaman.
     const searchInput = document.getElementById("searchInput"); 
+    // Mengambil input pencarian untuk memfilter data.
     const paginationControls = document.getElementById("pagination-controls"); 
-    const totalBarangElement = document.getElementById("total-barang"); // Total stok barang (atau total barang masuk? Asumsi Total Barang Masuk)
+    // Mengambil elemen pembungkus tombol pagination (prev, next, nomor halaman).
+    const totalBarangElement = document.getElementById("total-barang"); 
+    // Total stok barang (atau total barang masuk? Asumsi Total Barang Masuk)
 
     if (!tableBody || !rowsPerPageSelect || !searchInput || !paginationControls || !totalBarangElement) {
+    // Mengecek apakah semua elemen penting pada tabel tersedia di halaman.
+   // Jika salah satu elemen tidak ditemukan, tampilkan error di console.
         console.error("Error: Salah satu elemen kontrol tabel (tbody, select, input search, atau pagination) tidak ditemukan. Pastikan ID HTML sudah benar!");
+        // Menampilkan pesan error di console agar developer tahu ada elemen HTML yang belum sesuai ID-nya.
         return; 
+        // Menghentikan eksekusi function untuk mencegah error lanjutan.
     }
 
     let currentPage = 1;
+    // Menyimpan nomor halaman yang sedang aktif, dimulai dari halaman 1.
     let currentLimit = parseInt(rowsPerPageSelect.value || '10'); 
+    // Mengambil nilai limit (jumlah data per halaman) dari dropdown rowsPerPageSelect.
+   // Jika tidak ada nilai, default-nya '10'. Lalu parse menjadi angka integer.
 
     // --- Helper Function untuk Pindah Halaman ---
     async function goToPage(page) {
-        // Ambil totalRows global untuk menghitung totalPages
+         // Fungsi untuk pindah ke halaman tertentu
+
         const { count: totalRows } = await supabase.from("barang_masuk").select(`id_barangmasuk`, { count: 'exact' });
+        // Mengambil total jumlah baris di tabel "barang_masuk"
+
 
         const totalPages = Math.ceil(totalRows / currentLimit);
+         // Menghitung total halaman berdasarkan total data & limit
 
         if (page < 1 || page > totalPages) return;
+        // Jika halaman yang diminta tidak valid → hentikan
 
         currentPage = page;
-        await loadBarangMasuk(currentPage, currentLimit, searchInput.value.trim()); 
+         // Set halaman aktif ke halaman yang dipilih
+        await loadBarangMasuk(currentPage, currentLimit, searchInput.value.trim());
+        // Load ulang data tabel sesuai halaman, limit, dan pencarian 
     }
 
     // --- Fungsi Pembantu Pagination: Membuat Tombol Angka ---
     function createPageButton(pageNumber, container) {
+        // Membuat tombol halaman berdasarkan nomor halaman
         const pageBtn = document.createElement('span');
+        // Membuat elemen <span> untuk tombol halaman
         pageBtn.textContent = String(pageNumber).padStart(2, '0');
+         // Menampilkan nomor halaman, dipaksa 2 digit (01, 02, 03)
         
         if (pageNumber === currentPage) {
+            // Jika tombol ini adalah halaman yang sedang aktif
             pageBtn.classList.add('active'); 
+            
         } else {
             pageBtn.addEventListener('click', () => goToPage(pageNumber));
+            // Jika bukan halaman aktif → klik untuk pindah halaman
         }
         container.appendChild(pageBtn);
+        // Tambahkan tombol halaman ke dalam container pagination
     }
 
     // --- Fungsi Pembantu Pagination: Menambahkan Elipsis (...) ---
